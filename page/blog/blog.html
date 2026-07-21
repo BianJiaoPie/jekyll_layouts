@@ -10,6 +10,10 @@ layout: base
 
 <h1>{{ page.title }}</h1>
 
+{%- if page.image %}
+<img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" class="post-cover" width="{{ page.image_width | default: 825 }}" height="{{ page.image_height | default: 1275 }}" style="width:100%;max-width:800px;height:auto;border-radius:8px;display:block;margin:0 auto 1.5em;" loading="eager" fetchpriority="high">
+{%- endif %}
+
 <heading-id-injector>
 {{ content }}
 </heading-id-injector>
