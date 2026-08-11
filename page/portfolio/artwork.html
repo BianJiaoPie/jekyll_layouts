@@ -1,0 +1,61 @@
+---
+layout: base
+---
+
+<link rel="stylesheet" href="{{ '/Portfolio/assets/portfolio.css' | relative_url }}">
+
+<article class="artwork-page">
+  <header class="artwork-card" aria-labelledby="artwork-title">
+    <div class="artwork-card__visual">
+      {%- if page.cover_ready -%}
+        <img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | escape }}">
+      {%- else -%}
+        <div class="artwork-card__placeholder" role="img" aria-label="作品圖片待補">
+          <span>Artwork image</span>
+          <small>待補作品圖</small>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="artwork-card__information">
+      <p class="artwork-card__eyebrow">Artwork</p>
+      <h1 id="artwork-title">〈{{ page.title | escape }}〉{% if page.title_en %}<span lang="en">{{ page.title_en | escape }}</span>{% endif %}</h1>
+
+      <dl class="artwork-meta">
+        <div>
+          <dt>Artwork No.</dt>
+          <dd>{{ page.artwork_id | escape }}</dd>
+        </div>
+        <div>
+          <dt>Year</dt>
+          <dd>{{ page.year }}</dd>
+        </div>
+        <div>
+          <dt>Dimensions</dt>
+          <dd>{{ page.dimensions.width_cm }} × {{ page.dimensions.height_cm }} cm</dd>
+        </div>
+        <div>
+          <dt>Medium</dt>
+          <dd>{{ page.medium | join: '、' }}</dd>
+        </div>
+        {%- if page.commission.display_name -%}
+        <div>
+          <dt>Commission</dt>
+          <dd>{{ page.commission.display_name | escape }}</dd>
+        </div>
+        {%- endif -%}
+      </dl>
+    </div>
+
+    <p class="artwork-card__brand">BianJiaoPie Studio · bianjiaopie.com</p>
+  </header>
+
+  <div class="artwork-body">
+    {{ content }}
+  </div>
+
+  <footer class="artwork-copyright">
+    <span>Artist: Fung 蔡承芳</span>
+    <span>© Fung 蔡承芳 / BianJiaoPie Studio</span>
+  </footer>
+</article>
