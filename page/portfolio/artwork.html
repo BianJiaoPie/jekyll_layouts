@@ -38,6 +38,12 @@ layout: base
           <dt>Medium</dt>
           <dd>{{ page.medium | join: '、' }}</dd>
         </div>
+        {%- if page.availability_label -%}
+        <div>
+          <dt>Status</dt>
+          <dd>{{ page.availability_label | escape }}</dd>
+        </div>
+        {%- endif -%}
         {%- if page.commission.display_name -%}
         <div>
           <dt>Commission</dt>
@@ -55,7 +61,10 @@ layout: base
   </div>
 
   <footer class="artwork-copyright">
-    <span>Artist: Fung 蔡承芳</span>
-    <span>© Fung 蔡承芳 / BianJiaoPie Studio</span>
+    <div class="artwork-copyright__line">
+      <span>Artist: Fung 蔡承芳</span>
+      <span>© {{ page.year }} Fung 蔡承芳 / BianJiaoPie Studio · All rights reserved.</span>
+    </div>
+    <p>本作品及圖片僅供個人瀏覽。未經書面授權，不得重製、轉載、修改、用於商品、訓練資料或其他商業用途。</p>
   </footer>
 </article>
