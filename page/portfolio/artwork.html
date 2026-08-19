@@ -79,7 +79,7 @@ layout: base
     const lightbox = document.querySelector('.artwork-lightbox');
     const lightboxImage = lightbox?.querySelector('.artwork-lightbox__image');
     const closeButton = lightbox?.querySelector('.artwork-lightbox__close');
-    const artworkImages = document.querySelectorAll('.artwork-card__visual img, .artwork-figure img');
+    const artworkImages = document.querySelectorAll('.artwork-card__visual img');
 
     if (!lightbox || !lightboxImage || !closeButton || !artworkImages.length) return;
 
