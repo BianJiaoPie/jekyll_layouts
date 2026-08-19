@@ -81,17 +81,7 @@ layout: base
 
     if (!source || !lightbox || !enlarged) return;
 
-    let isOpen = false;
-    let closeTimer;
-
-    const isInside = (event, rect) => (
-      event.clientX >= rect.left && event.clientX <= rect.right &&
-      event.clientY >= rect.top && event.clientY <= rect.bottom
-    );
-
     const close = () => {
-      clearTimeout(closeTimer);
-      isOpen = false;
       lightbox.hidden = true;
       lightbox.setAttribute('aria-hidden', 'true');
     };
@@ -109,23 +99,10 @@ layout: base
       resize();
       lightbox.hidden = false;
       lightbox.setAttribute('aria-hidden', 'false');
-      isOpen = true;
     };
 
     source.addEventListener('pointerenter', open);
-    document.addEventListener('pointermove', (event) => {
-      if (!isOpen) return;
-      const sourceRect = source.getBoundingClientRect();
-      const enlargedRect = enlarged.getBoundingClientRect();
-
-      if (isInside(event, sourceRect) || isInside(event, enlargedRect)) {
-        clearTimeout(closeTimer);
-        return;
-      }
-
-      clearTimeout(closeTimer);
-      closeTimer = setTimeout(close, 250);
-    });
+    source.addEventListener('pointerleave', close);
     window.addEventListener('resize', resize);
   })();
 </script>
