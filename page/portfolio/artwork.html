@@ -69,7 +69,7 @@ layout: base
   </footer>
 </article>
 
-<div class="artwork-hover-lightbox" hidden aria-hidden="true">
+<div class="artwork-hover-lightbox" aria-hidden="true">
   <img alt="">
 </div>
 
@@ -82,7 +82,7 @@ layout: base
     if (!source || !lightbox || !enlarged) return;
 
     const close = () => {
-      lightbox.hidden = true;
+      lightbox.classList.remove('is-visible');
       lightbox.setAttribute('aria-hidden', 'true');
     };
 
@@ -97,7 +97,7 @@ layout: base
       enlarged.src = source.currentSrc || source.src;
       enlarged.alt = source.alt;
       resize();
-      lightbox.hidden = false;
+      lightbox.classList.add('is-visible');
       lightbox.setAttribute('aria-hidden', 'false');
     };
 
