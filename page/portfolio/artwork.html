@@ -68,3 +68,39 @@ layout: base
     <p>本作品及圖片僅供個人瀏覽。未經書面授權，不得重製、轉載、修改、用於商品、訓練資料或其他商業用途。</p>
   </footer>
 </article>
+
+<dialog class="artwork-lightbox" aria-label="放大檢視作品圖片">
+  <button class="artwork-lightbox__close" type="button" aria-label="關閉圖片">×</button>
+  <img class="artwork-lightbox__image" alt="">
+</dialog>
+
+<script>
+  (() => {
+    const lightbox = document.querySelector('.artwork-lightbox');
+    const lightboxImage = lightbox?.querySelector('.artwork-lightbox__image');
+    const closeButton = lightbox?.querySelector('.artwork-lightbox__close');
+    const artworkImages = document.querySelectorAll('.artwork-card__visual img, .artwork-figure img');
+
+    if (!lightbox || !lightboxImage || !closeButton || !artworkImages.length) return;
+
+    const closeLightbox = () => {
+      lightbox.close();
+      lightboxImage.removeAttribute('src');
+    };
+
+    artworkImages.forEach((image) => {
+      image.addEventListener('click', () => {
+        lightboxImage.src = image.currentSrc || image.src;
+        lightboxImage.alt = image.alt;
+        lightbox.showModal();
+        closeButton.focus();
+      });
+    });
+
+    closeButton.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    lightbox.addEventListener('cancel', closeLightbox);
+  })();
+</script>
